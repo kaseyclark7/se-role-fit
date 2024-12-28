@@ -1,0 +1,31 @@
+export const headerStyles = `
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+    // ... rest of header styles
+  }
+`;
+
+export const formStyles = `
+  .form-group {
+    background: #f5f3ff;
+    // ... rest of form styles
+  }
+`;
+
+export const tooltipStyles = `
+  .info-tooltip {
+    position: relative;
+    // ... rest of tooltip styles
+  }
+`;
+
+import { headerStyles } from './header.styles';
+import { formStyles } from './form.styles';
+import { tooltipStyles } from './tooltips.styles';
+
+export const styles = `
+  ${headerStyles}
+  ${formStyles}
+  ${tooltipStyles}
+`; 

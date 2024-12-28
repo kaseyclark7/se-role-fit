@@ -1,0 +1,18 @@
+.framework-categories {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+
+  .core-frameworks,
+  .additional-frameworks {
+    h4 {
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+  }
+} 
