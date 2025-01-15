@@ -177,6 +177,46 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
       margin: 0.5rem 0 0;
       font-size: 1.1rem;
     }
+
+    .reset-button {
+      display: block;
+      margin: 2rem auto;
+      padding: 0.8rem 1.5rem;
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--neon-purple);
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reset-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(191, 123, 255, 0.3);
+    }
+
+    .reset-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(191, 123, 255, 0.2),
+        transparent
+      );
+      transition: 0.5s;
+    }
+
+    .reset-button:hover::before {
+      left: 100%;
+    }
   `]
 })
 export class CalculatorComponent {
@@ -293,5 +333,56 @@ export class CalculatorComponent {
     } else {
       return "Entry level fit. We encourage you to gain more experience in core technologies.";
     }
+  }
+
+  resetCalculator() {
+    // Reset experience
+    this.experience = 0;
+
+    // Reset languages
+    this.languages = {
+      javascript: false,
+      csharp: false,
+      python: false,
+      java: false,
+      cpp: false,
+      php: false,
+      go: false,
+      kotlin: false,
+      swift: false
+    };
+
+    // Reset frameworks
+    this.frameworks = {
+      angular: false,
+      react: false,
+      vue: false,
+      dotnet: false,
+      spring: false,
+      express: false
+    };
+
+    // Reset platforms
+    this.platforms = {
+      mia: false,
+      github: false,
+      sql: false,
+      grafana: false,
+      kafka: false
+    };
+
+    // Reset skills
+    this.skills = {
+      apiFirst: false,
+      ddd: false,
+      cleanCode: false,
+      tdd: false,
+      pairProgramming: false,
+      cloud: false,
+      microservices: false
+    };
+
+    // Recalculate score
+    this.score = this.calculateScore();
   }
 }
