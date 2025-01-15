@@ -32,41 +32,75 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
         <div class="subsection">
           <h4>Core Languages</h4>
           <div class="checkbox-group">
-            <label>
-              <input type="checkbox" [(ngModel)]="languages.javascript"> JavaScript/TypeScript
-            </label>
-            <label>
-              <input type="checkbox" [(ngModel)]="languages.csharp"> C#
-            </label>
+            <label><input type="checkbox" [(ngModel)]="languages.javascript"> JavaScript/TypeScript</label>
+            <label><input type="checkbox" [(ngModel)]="languages.csharp"> C#</label>
           </div>
         </div>
 
         <div class="subsection">
           <h4>Additional Languages</h4>
           <div class="checkbox-group">
-            <label>
-              <input type="checkbox" [(ngModel)]="languages.python"> Python
-            </label>
-            <label>
-              <input type="checkbox" [(ngModel)]="languages.java"> Java
-            </label>
-            <label>
-              <input type="checkbox" [(ngModel)]="languages.cpp"> C++
-            </label>
-            <label>
-              <input type="checkbox" [(ngModel)]="languages.php"> PHP
-            </label>
-            <label>
-              <input type="checkbox" [(ngModel)]="languages.go"> Go
-            </label>
-            <label>
-              <input type="checkbox" [(ngModel)]="languages.kotlin"> Kotlin
-            </label>
-            <label>
-              <input type="checkbox" [(ngModel)]="languages.swift"> Swift
-            </label>
+            <label><input type="checkbox" [(ngModel)]="languages.python"> Python</label>
+            <label><input type="checkbox" [(ngModel)]="languages.java"> Java</label>
+            <label><input type="checkbox" [(ngModel)]="languages.cpp"> C++</label>
+            <label><input type="checkbox" [(ngModel)]="languages.php"> PHP</label>
+            <label><input type="checkbox" [(ngModel)]="languages.go"> Go</label>
+            <label><input type="checkbox" [(ngModel)]="languages.kotlin"> Kotlin</label>
+            <label><input type="checkbox" [(ngModel)]="languages.swift"> Swift</label>
           </div>
         </div>
+      </div>
+
+      <div class="section">
+        <h3>Frameworks</h3>
+        <div class="subsection">
+          <h4>Core Frameworks</h4>
+          <div class="checkbox-group">
+            <label><input type="checkbox" [(ngModel)]="frameworks.dotnet"> .NET</label>
+            <label><input type="checkbox" [(ngModel)]="frameworks.angular"> Angular</label>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h4>Additional Frameworks</h4>
+          <div class="checkbox-group">
+            <label><input type="checkbox" [(ngModel)]="frameworks.react"> React</label>
+            <label><input type="checkbox" [(ngModel)]="frameworks.vue"> Vue.js</label>
+            <label><input type="checkbox" [(ngModel)]="frameworks.spring"> Spring</label>
+            <label><input type="checkbox" [(ngModel)]="frameworks.express"> Express.js/NestJS</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Platforms & Tools</h3>
+        <div class="checkbox-group">
+          <label><input type="checkbox" [(ngModel)]="platforms.mia"> MIA</label>
+          <label><input type="checkbox" [(ngModel)]="platforms.github"> GitHub</label>
+          <label><input type="checkbox" [(ngModel)]="platforms.sql"> SQL</label>
+          <label><input type="checkbox" [(ngModel)]="platforms.grafana"> Grafana</label>
+          <label><input type="checkbox" [(ngModel)]="platforms.kafka"> Kafka</label>
+          <label><input type="checkbox" [(ngModel)]="platforms.mongodb"> MongoDB</label>
+          <label><input type="checkbox" [(ngModel)]="platforms.redis"> Redis</label>
+          <label><input type="checkbox" [(ngModel)]="platforms.elasticsearch"> Elasticsearch</label>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Software Engineering Practices</h3>
+        <div class="checkbox-group">
+          <label><input type="checkbox" [(ngModel)]="skills.apiFirst"> API-First Design</label>
+          <label><input type="checkbox" [(ngModel)]="skills.ddd"> Domain-Driven Design</label>
+          <label><input type="checkbox" [(ngModel)]="skills.cleanCode"> Clean Code</label>
+          <label><input type="checkbox" [(ngModel)]="skills.tdd"> Test-Driven Development</label>
+          <label><input type="checkbox" [(ngModel)]="skills.pairProgramming"> Pair Programming</label>
+          <label><input type="checkbox" [(ngModel)]="skills.cloud"> Cloud Development</label>
+          <label><input type="checkbox" [(ngModel)]="skills.microservices"> Microservices</label>
+        </div>
+      </div>
+
+      <div class="score-section">
+        <h2>Fit Score: {{ calculateScore() }}%</h2>
       </div>
     </div>
   `,
@@ -105,17 +139,29 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
       align-items: center;
       gap: 0.5rem;
       color: var(--text-primary);
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    label:hover {
+      color: var(--neon-purple);
     }
 
     input[type="checkbox"] {
       accent-color: var(--neon-purple);
     }
 
-    .experience-value {
+    .score-section {
       text-align: center;
-      color: var(--neon-purple);
-      font-size: 1.2rem;
-      margin-top: 1rem;
+      margin-top: 2rem;
+      padding: 2rem;
+      background: rgba(0, 243, 255, 0.1);
+      border-radius: 8px;
+    }
+
+    .score-section h2 {
+      color: var(--neon-blue);
+      font-size: 2rem;
     }
   `]
 })
@@ -132,37 +178,25 @@ export class CalculatorComponent {
     kotlin: false,
     swift: false
   };
-  
-  frameworks: SkillsModel['frameworks'] = {
-    // Core Frameworks
+  frameworks: any = {
     dotnet: false,
     angular: false,
-    // Additional Frameworks
     react: false,
     vue: false,
     spring: false,
     express: false
   };
-
-  platforms: SkillsModel['platforms'] = {
+  platforms: any = {
     mia: false,
     github: false,
-    gitlab: false,
-    azureDevops: false,
-    rabbitmq: false,
-    kafka: false,
     sql: false,
+    grafana: false,
+    kafka: false,
     mongodb: false,
     redis: false,
-    elasticsearch: false,
-    storageGrid: false,
-    camunda: false,
-    launchDarkly: false,
-    playwright: false,
-    grafana: false
+    elasticsearch: false
   };
-
-  skills: SkillsModel['skills'] = {
+  skills: any = {
     apiFirst: false,
     ddd: false,
     cleanCode: false,
@@ -172,28 +206,57 @@ export class CalculatorComponent {
     microservices: false
   };
 
-  score = 0;
-  feedback = '';
-  resultClass = '';
-
-  constructor(private calculatorService: CalculatorService) {}
-
-  onExperienceChange(years: number) {
-    this.experience = years;
-    this.calculate();
-  }
-
-  calculate() {
-    const result = this.calculatorService.calculateScore({
-      experience: this.experience,
-      languages: this.languages,
-      frameworks: this.frameworks,
-      platforms: this.platforms,
-      skills: this.skills
-    });
-
-    this.score = result.score;
-    this.feedback = result.feedback;
-    this.resultClass = result.resultClass;
+  calculateScore(): number {
+    let score = 0;
+    
+    // Experience (30 points max, 6 points per year up to 5 years)
+    score += Math.min(this.experience * 6, 30);
+    
+    // Core Languages (8 points each)
+    if (this.languages.javascript) score += 8;
+    if (this.languages.csharp) score += 8;
+    
+    // Additional Languages (2 points each)
+    if (this.languages.python) score += 2;
+    if (this.languages.java) score += 2;
+    if (this.languages.cpp) score += 2;
+    if (this.languages.php) score += 2;
+    if (this.languages.go) score += 2;
+    if (this.languages.kotlin) score += 2;
+    if (this.languages.swift) score += 2;
+    
+    // Core Frameworks (8 points each)
+    if (this.frameworks.dotnet) score += 8;
+    if (this.frameworks.angular) score += 8;
+    
+    // Additional Frameworks (2 points each)
+    if (this.frameworks.react) score += 2;
+    if (this.frameworks.vue) score += 2;
+    if (this.frameworks.spring) score += 2;
+    if (this.frameworks.express) score += 2;
+    
+    // Platforms & Tools (20 points max)
+    let platformScore = 0;
+    if (this.platforms.mia) platformScore += 5;
+    if (this.platforms.github) platformScore += 5;
+    if (this.platforms.sql) platformScore += 5;
+    if (this.platforms.grafana) platformScore += 5;
+    if (this.platforms.kafka) platformScore += 5;
+    platformScore = Math.min(platformScore, 20);
+    score += platformScore;
+    
+    // Software Engineering Practices (3 points each, 20 points max)
+    let practiceScore = 0;
+    if (this.skills.apiFirst) practiceScore += 3;
+    if (this.skills.ddd) practiceScore += 3;
+    if (this.skills.cleanCode) practiceScore += 3;
+    if (this.skills.tdd) practiceScore += 3;
+    if (this.skills.pairProgramming) practiceScore += 3;
+    if (this.skills.cloud) practiceScore += 3;
+    if (this.skills.microservices) practiceScore += 3;
+    practiceScore = Math.min(practiceScore, 20);
+    score += practiceScore;
+    
+    return Math.min(Math.round(score), 100);
   }
 }

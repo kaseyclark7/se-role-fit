@@ -214,33 +214,15 @@ import { CommonModule } from '@angular/common';
       animation: glow-pulse 2s infinite;
     }
 
-    .modal-overlay {
+    .modal {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(10, 10, 31, 0.8);
-      backdrop-filter: blur(5px);
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      z-index: 998;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .modal {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.9);
-      width: 90%;
-      max-width: 800px;
-      max-height: 90vh;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
@@ -250,14 +232,18 @@ import { CommonModule } from '@angular/common';
     .modal.active {
       opacity: 1;
       visibility: visible;
-      transform: translate(-50%, -50%) scale(1);
     }
 
     .modal-content {
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      background: var(--background);
+      border: 1px solid var(--neon-blue);
+      border-radius: 8px;
       padding: 2rem;
-      overflow-y: auto;
-      max-height: 80vh;
       position: relative;
+      overflow-y: auto;
     }
 
     .close-button {
@@ -364,6 +350,25 @@ import { CommonModule } from '@angular/common';
       .traits-grid {
         grid-template-columns: 1fr;
       }
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 998;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
   `]
 })
