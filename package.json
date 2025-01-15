@@ -5,7 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "dev": "ng serve"
+    "dev": "ng serve",
+    "deploy": "ng build --configuration=production && npx angular-cli-ghpages --dir=dist/demo --no-silent",
+    "watch": "ng build --watch --configuration development"
   },
   "dependencies": {
     "@angular/animations": "^18.1.0",
