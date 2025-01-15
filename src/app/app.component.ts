@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { ModalService } from './services/modal.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, CalculatorComponent],
+  imports: [CommonModule, CalculatorComponent, AsyncPipe],
+  providers: [ModalService],
   template: `
     <app-calculator></app-calculator>
 

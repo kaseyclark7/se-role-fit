@@ -7,6 +7,7 @@ import { ModalService } from '../../services/modal.service';
   selector: 'app-calculator-header',
   standalone: true,
   imports: [CommonModule],
+  providers: [ModalService],
   template: `
     <div class="header glass-effect">
       <div class="logo">

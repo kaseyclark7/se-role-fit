@@ -14,8 +14,7 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
   imports: [
     CommonModule, 
     FormsModule, 
-    ExperienceSliderComponent,
-    CalculatorHeaderComponent
+    ExperienceSliderComponent
   ],
   template: `
     <app-calculator-header></app-calculator-header>
