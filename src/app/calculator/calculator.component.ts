@@ -21,18 +21,11 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
     <app-calculator-header (openModal)="openModal.emit()"></app-calculator-header>
     
     <div class="calculator-content">
-      <button class="reset-button glass-effect" (click)="resetCalculator()">
-        Reset All Selections
-      </button>
+      <h2>Years of Experience</h2>
+      <app-experience-slider [(value)]="experience"></app-experience-slider>
 
       <div class="section">
-        <h3>Years of Experience</h3>
-        <app-experience-slider [(value)]="experience"></app-experience-slider>
-        <div class="experience-value">{{ experience }} Years</div>
-      </div>
-
-      <div class="section">
-        <h3>Programming Languages</h3>
+        <h2>Programming Languages</h2>
         <div class="subsection">
           <h4>Core Languages</h4>
           <div class="checkbox-group">
@@ -56,7 +49,7 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
       </div>
 
       <div class="section">
-        <h3>Frameworks</h3>
+        <h2>Frameworks</h2>
         <div class="subsection">
           <h4>Core Frameworks</h4>
           <div class="checkbox-group">
@@ -77,7 +70,7 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
       </div>
 
       <div class="section">
-        <h3>Platforms & Tools</h3>
+        <h2>Platforms & Tools</h2>
         <div class="checkbox-group">
           <label><input type="checkbox" [(ngModel)]="platforms.mia"> MIA</label>
           <label><input type="checkbox" [(ngModel)]="platforms.github"> GitHub</label>
@@ -91,7 +84,7 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
       </div>
 
       <div class="section">
-        <h3>Software Engineering Practices</h3>
+        <h2>Software Engineering Practices</h2>
         <div class="checkbox-group">
           <label><input type="checkbox" [(ngModel)]="skills.apiFirst"> API-First Design</label>
           <label><input type="checkbox" [(ngModel)]="skills.ddd"> Domain-Driven Design</label>
@@ -103,10 +96,14 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
         </div>
       </div>
 
-      <div class="score-section glass-effect">
-        <h2>{{ calculateScore() }}%</h2>
-        <p class="feedback">{{ getFeedback() }}</p>
-      </div>
+      <button class="reset-button glass-effect" (click)="resetCalculator()">
+        Reset All Selections
+      </button>
+    </div>
+
+    <div class="score-section glass-effect">
+      <h2>{{ calculateScore() }}%</h2>
+      <p class="feedback">{{ getFeedback() }}</p>
     </div>
   `,
   styles: [`
@@ -195,6 +192,7 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      font-size: 1rem;
     }
 
     .reset-button:hover {
