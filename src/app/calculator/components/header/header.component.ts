@@ -18,6 +18,7 @@ import { headerStyles } from './header.styles';
       </div>
       <h1>SE Role Fit <span class="highlight">Calculator</span></h1>
       <div class="subtitle">Veterans United Home Loans</div>
+      <div class="header-accent"></div>
     </div>
   `,
   styles: [`
@@ -28,6 +29,7 @@ import { headerStyles } from './header.styles';
       max-width: 900px;
       position: relative;
       overflow: hidden;
+      border: 1px solid rgba(0, 243, 255, 0.2);
     }
 
     .header::before {
@@ -47,18 +49,40 @@ import { headerStyles } from './header.styles';
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       margin: 0;
-      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.5));
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: -1px;
+      color: var(--neon-blue);
+      text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+    }
+
+    .highlight {
+      color: var(--neon-purple);
+      text-shadow: 0 0 10px rgba(181, 55, 242, 0.5);
     }
 
     .subtitle {
-      color: #8888a0;
+      color: var(--neon-blue);
       font-size: 1.2rem;
       margin-top: 0.5rem;
+      opacity: 0.8;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .header-accent {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, 
+        var(--neon-blue), 
+        var(--neon-purple), 
+        var(--neon-blue)
+      );
+      animation: gradient-shift 3s linear infinite;
     }
 
     .cube {
@@ -77,14 +101,6 @@ import { headerStyles } from './header.styles';
       border: 2px solid var(--neon-blue);
       background: rgba(0, 243, 255, 0.1);
     }
-
-    /* Add cube face transformations */
-    .front { transform: translateZ(25px); }
-    .back { transform: translateZ(-25px) rotateY(180deg); }
-    .right { transform: translateX(25px) rotateY(90deg); }
-    .left { transform: translateX(-25px) rotateY(-90deg); }
-    .top { transform: translateY(-25px) rotateX(90deg); }
-    .bottom { transform: translateY(25px) rotateX(-90deg); }
   `]
 })
 export class CalculatorHeaderComponent {} 

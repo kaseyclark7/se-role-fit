@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;600&display=swap');
+
 body {
   margin: 0;
-  padding: 0;
-  font-family: 'JetBrains Mono', monospace;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
   background: #0a0a1f;
   color: #e0e0ff;
   min-height: 100vh;
@@ -17,9 +19,12 @@ body {
   --neon-purple: #b537f2;
   --dark-bg: #0a0a1f;
   --card-bg: rgba(16, 16, 45, 0.7);
-  --success-green: #00ff9d;
-  --warning-orange: #ff9d00;
-  --error-red: #ff0058;
+  --text-primary: #e0e0ff;
+  --text-secondary: #8888a0;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .glass-effect {
