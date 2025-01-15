@@ -109,6 +109,7 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
       max-width: 800px;
       margin: 0 auto;
       padding: 2rem;
+      padding-bottom: 100px;
     }
 
     .section {
@@ -152,16 +153,22 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
     }
 
     .score-section {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
       text-align: center;
-      margin-top: 2rem;
-      padding: 2rem;
-      background: rgba(0, 243, 255, 0.1);
-      border-radius: 8px;
+      padding: 1.5rem;
+      background: rgba(13, 17, 23, 0.95);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--neon-blue);
+      z-index: 100;
     }
 
     .score-section h2 {
       color: var(--neon-blue);
       font-size: 2rem;
+      margin: 0;
     }
   `]
 })
