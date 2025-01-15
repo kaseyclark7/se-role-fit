@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { headerStyles } from './header.styles';
 import { CommonModule } from '@angular/common';
-import { ModalService } from '../../services/modal.service';
+import { ModalService } from '../../../services/modal.service';
 
 @Component({
   selector: 'app-calculator-header',
