@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalService } from '../../../services/modal.service';
 
 @Component({
   selector: 'app-calculator-header',
@@ -20,7 +19,7 @@ import { ModalService } from '../../../services/modal.service';
       </div>
       <h1>SE Role Fit <span class="highlight">Calculator</span></h1>
       <div class="subtitle">VETERANS UNITED HOME LOANS</div>
-      <button class="job-info-button glass-effect" (click)="openModal()">
+      <button class="job-info-button glass-effect" (click)="openModal.emit()">
         View Job Description
         <div class="button-glow"></div>
       </button>
@@ -137,12 +136,5 @@ import { ModalService } from '../../../services/modal.service';
   `]
 })
 export class CalculatorHeaderComponent {
-  constructor(private modalService: ModalService) {
-    console.log('ModalService injected:', !!modalService);
-  }
-
-  openModal() {
-    console.log('Button clicked!');
-    this.modalService.open();
-  }
+  @Output() openModal = new EventEmitter<void>();
 } 

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalculatorComponent } from './calculator/calculator.component';
-import { ModalService } from './services/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +11,11 @@ import { ModalService } from './services/modal.service';
 
     <div 
       class="modal" 
-      [style.visibility]="(modalService.isOpen$ | async) ? 'visible' : 'hidden'"
-      [style.opacity]="(modalService.isOpen$ | async) ? '1' : '0'"
+      [class.show-modal]="showModal"
     >
-      <div class="modal-overlay" (click)="closeModal()"></div>
+      <div class="modal-overlay" (click)="showModal = false"></div>
       <div class="modal-content">
-        <button class="close-button" (click)="closeModal()">×</button>
+        <button class="close-button" (click)="showModal = false">×</button>
         <h2>Software Engineer Position</h2>
         <div class="job-description">
           <h3>About the Role</h3>
@@ -56,27 +54,25 @@ import { ModalService } from './services/modal.service';
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
       display: flex;
       justify-content: center;
       align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
       z-index: 1000;
-      transition: visibility 0s, opacity 0.3s ease;
     }
 
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(5px);
+    .show-modal {
+      opacity: 1;
+      visibility: visible;
     }
 
     .modal-content {
-      position: relative;
       background: var(--background);
       padding: 2rem;
       border-radius: 8px;
@@ -84,8 +80,14 @@ import { ModalService } from './services/modal.service';
       width: 90%;
       max-height: 90vh;
       overflow-y: auto;
+      position: relative;
       border: 1px solid var(--neon-blue);
-      z-index: 1001;
+      transform: translateY(-20px);
+      transition: transform 0.3s ease;
+    }
+
+    .show-modal .modal-content {
+      transform: translateY(0);
     }
 
     .close-button {
@@ -110,28 +112,28 @@ import { ModalService } from './services/modal.service';
       line-height: 1.6;
     }
 
-    .job-description h2 {
+    h2 {
       color: var(--neon-blue);
       margin-bottom: 1.5rem;
     }
 
-    .job-description h3 {
+    h3 {
       color: var(--neon-purple);
       margin: 1.5rem 0 1rem;
     }
 
-    .job-description ul {
+    ul {
       list-style-type: none;
       padding-left: 0;
     }
 
-    .job-description li {
+    li {
       margin-bottom: 0.5rem;
       padding-left: 1.5rem;
       position: relative;
     }
 
-    .job-description li:before {
+    li:before {
       content: "•";
       color: var(--neon-blue);
       position: absolute;
@@ -140,9 +142,9 @@ import { ModalService } from './services/modal.service';
   `]
 })
 export class AppComponent {
-  constructor(public modalService: ModalService) {}
+  showModal = false;
 
-  closeModal() {
-    this.modalService.close();
+  openModal() {
+    this.showModal = true;
   }
 } 

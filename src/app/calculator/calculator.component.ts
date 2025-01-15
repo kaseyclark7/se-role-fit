@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CalculatorService } from './calculator.service';
@@ -18,7 +18,7 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
     CalculatorHeaderComponent
   ],
   template: `
-    <app-calculator-header></app-calculator-header>
+    <app-calculator-header (openModal)="openModal.emit()"></app-calculator-header>
     
     <div class="calculator-content">
       <div class="section">
@@ -173,6 +173,7 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
   `]
 })
 export class CalculatorComponent {
+  @Output() openModal = new EventEmitter<void>();
   experience = 0;
   languages: any = {
     javascript: false,
