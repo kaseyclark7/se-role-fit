@@ -6,12 +6,21 @@ import { styles } from './calculator.styles';
 import { template } from './calculator.template';
 import { SkillsModel } from './models/skills.model';
 import { ExperienceSliderComponent } from './experience-slider/experience-slider.component';
+import { CalculatorHeaderComponent } from './components/header/header.component';
 
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [CommonModule, FormsModule, ExperienceSliderComponent],
-  template,
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    ExperienceSliderComponent,
+    CalculatorHeaderComponent
+  ],
+  template: `
+    <app-calculator-header></app-calculator-header>
+    <!-- Rest of your calculator template -->
+  `,
   styles: [styles]
 })
 export class CalculatorComponent {
