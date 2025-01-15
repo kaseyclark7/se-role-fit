@@ -25,44 +25,106 @@ import { SkillToggleComponent } from './components/skill-toggle/skill-toggle.com
       <div class="section">
         <h3>Years of Experience</h3>
         <app-experience-slider [(value)]="experience"></app-experience-slider>
+        <div class="experience-value">{{ experience }} Years</div>
       </div>
 
       <div class="section">
         <h3>Programming Languages</h3>
         <div class="subsection">
           <h4>Core Languages</h4>
-          <app-skill-toggle label="JavaScript/TypeScript" [(value)]="languages.javascript" [points]="8"></app-skill-toggle>
-          <app-skill-toggle label="C#" [(value)]="languages.csharp" [points]="8"></app-skill-toggle>
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" [(ngModel)]="languages.javascript"> JavaScript/TypeScript
+            </label>
+            <label>
+              <input type="checkbox" [(ngModel)]="languages.csharp"> C#
+            </label>
+          </div>
         </div>
 
         <div class="subsection">
           <h4>Additional Languages</h4>
-          <div class="skills-grid">
-            <app-skill-toggle label="Python" [(value)]="languages.python" [points]="2"></app-skill-toggle>
-            <app-skill-toggle label="Java" [(value)]="languages.java" [points]="2"></app-skill-toggle>
-            <app-skill-toggle label="C++" [(value)]="languages.cpp" [points]="2"></app-skill-toggle>
-            <app-skill-toggle label="PHP" [(value)]="languages.php" [points]="2"></app-skill-toggle>
-            <app-skill-toggle label="Go" [(value)]="languages.go" [points]="2"></app-skill-toggle>
-            <app-skill-toggle label="Kotlin" [(value)]="languages.kotlin" [points]="2"></app-skill-toggle>
-            <app-skill-toggle label="Swift" [(value)]="languages.swift" [points]="2"></app-skill-toggle>
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" [(ngModel)]="languages.python"> Python
+            </label>
+            <label>
+              <input type="checkbox" [(ngModel)]="languages.java"> Java
+            </label>
+            <label>
+              <input type="checkbox" [(ngModel)]="languages.cpp"> C++
+            </label>
+            <label>
+              <input type="checkbox" [(ngModel)]="languages.php"> PHP
+            </label>
+            <label>
+              <input type="checkbox" [(ngModel)]="languages.go"> Go
+            </label>
+            <label>
+              <input type="checkbox" [(ngModel)]="languages.kotlin"> Kotlin
+            </label>
+            <label>
+              <input type="checkbox" [(ngModel)]="languages.swift"> Swift
+            </label>
           </div>
         </div>
       </div>
-
-      <!-- Rest of your existing template -->
     </div>
   `,
   styles: [`
-    /* Keep your existing styles */
+    .calculator-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .section {
+      margin-bottom: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    h3 {
+      color: var(--neon-blue);
+      margin-bottom: 1rem;
+    }
+
+    h4 {
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    input[type="checkbox"] {
+      accent-color: var(--neon-purple);
+    }
+
+    .experience-value {
+      text-align: center;
+      color: var(--neon-purple);
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
   `]
 })
 export class CalculatorComponent {
   experience = 0;
-  languages: SkillsModel['languages'] = {
-    // Core Languages
+  languages: any = {
     javascript: false,
     csharp: false,
-    // Additional Languages
     python: false,
     java: false,
     cpp: false,
