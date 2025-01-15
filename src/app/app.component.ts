@@ -8,9 +8,13 @@ import { ModalService } from './services/modal.service';
   standalone: true,
   imports: [CommonModule, AsyncPipe, CalculatorComponent],
   template: `
+    {{ modalService.isOpen$ | async }}
     <app-calculator></app-calculator>
 
-    <div class="modal" [class.active]="modalService.isOpen$ | async">
+    <div 
+      class="modal" 
+      [style.display]="(modalService.isOpen$ | async) ? 'flex' : 'none'"
+    >
       <div class="modal-overlay" (click)="closeModal()"></div>
       <div class="modal-content">
         <button class="close-button" (click)="closeModal()">×</button>
@@ -55,14 +59,9 @@ import { ModalService } from './services/modal.service';
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.8);
-      display: none;
       justify-content: center;
       align-items: center;
       z-index: 1000;
-    }
-
-    .modal.active {
-      display: flex;
     }
 
     .modal-content {
@@ -75,6 +74,7 @@ import { ModalService } from './services/modal.service';
       overflow-y: auto;
       position: relative;
       border: 1px solid var(--neon-blue);
+      z-index: 1001;
     }
 
     .close-button {
@@ -129,9 +129,14 @@ import { ModalService } from './services/modal.service';
   `]
 })
 export class AppComponent {
-  constructor(public modalService: ModalService) {}
+  constructor(public modalService: ModalService) {
+    this.modalService.isOpen$.subscribe(isOpen => {
+      console.log('Modal state changed:', isOpen);
+    });
+  }
 
   closeModal() {
+    console.log('Closing modal');
     this.modalService.close();
   }
 } 

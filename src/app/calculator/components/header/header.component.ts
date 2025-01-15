@@ -137,9 +137,12 @@ import { ModalService } from '../../../services/modal.service';
   `]
 })
 export class CalculatorHeaderComponent {
-  constructor(private modalService: ModalService) {}
+  constructor(private modalService: ModalService) {
+    console.log('ModalService injected:', !!modalService);
+  }
 
   openModal() {
+    console.log('Button clicked!');
     this.modalService.open();
   }
 } 
