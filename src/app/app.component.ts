@@ -57,6 +57,7 @@ import { ModalService } from './services/modal.service';
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
+      z-index: 1000;
     }
 
     .modal.active {
@@ -81,7 +82,7 @@ import { ModalService } from './services/modal.service';
       border: 1px solid var(--neon-blue);
       border-radius: 8px;
       overflow-y: auto;
-      z-index: 1;
+      z-index: 1001;
     }
 
     .close-button {
@@ -93,6 +94,45 @@ import { ModalService } from './services/modal.service';
       color: var(--text-primary);
       font-size: 2rem;
       cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .close-button:hover {
+      color: var(--neon-blue);
+      transform: rotate(90deg);
+    }
+
+    .job-description {
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .job-description h2 {
+      color: var(--neon-blue);
+      margin-bottom: 1.5rem;
+    }
+
+    .job-description h3 {
+      color: var(--neon-purple);
+      margin: 1.5rem 0 1rem;
+    }
+
+    .job-description ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .job-description li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .job-description li:before {
+      content: "•";
+      color: var(--neon-blue);
+      position: absolute;
+      left: 0;
     }
   `]
 })
