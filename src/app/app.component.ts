@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
-import { CommonModule, AsyncPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { ModalService } from './services/modal.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, AsyncPipe, CalculatorComponent],
+  imports: [CommonModule, CalculatorComponent],
   template: `
-    {{ modalService.isOpen$ | async }}
     <app-calculator></app-calculator>
 
     <div 
       class="modal" 
-      [style.display]="(modalService.isOpen$ | async) ? 'flex' : 'none'"
+      [style.visibility]="(modalService.isOpen$ | async) ? 'visible' : 'hidden'"
+      [style.opacity]="(modalService.isOpen$ | async) ? '1' : '0'"
     >
       <div class="modal-overlay" (click)="closeModal()"></div>
       <div class="modal-content">
@@ -58,13 +58,25 @@ import { ModalService } from './services/modal.service';
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.8);
+      display: flex;
       justify-content: center;
       align-items: center;
       z-index: 1000;
+      transition: visibility 0s, opacity 0.3s ease;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
     }
 
     .modal-content {
+      position: relative;
       background: var(--background);
       padding: 2rem;
       border-radius: 8px;
@@ -72,7 +84,6 @@ import { ModalService } from './services/modal.service';
       width: 90%;
       max-height: 90vh;
       overflow-y: auto;
-      position: relative;
       border: 1px solid var(--neon-blue);
       z-index: 1001;
     }
@@ -86,7 +97,7 @@ import { ModalService } from './services/modal.service';
       color: var(--text-primary);
       font-size: 2rem;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease;
     }
 
     .close-button:hover {
@@ -129,14 +140,9 @@ import { ModalService } from './services/modal.service';
   `]
 })
 export class AppComponent {
-  constructor(public modalService: ModalService) {
-    this.modalService.isOpen$.subscribe(isOpen => {
-      console.log('Modal state changed:', isOpen);
-    });
-  }
+  constructor(public modalService: ModalService) {}
 
   closeModal() {
-    console.log('Closing modal');
     this.modalService.close();
   }
 } 
