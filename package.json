@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "dev": "ng serve",
-    "deploy": "ng build --configuration=production && npx angular-cli-ghpages --dir=dist/demo --no-silent",
+    "deploy": "ng build --configuration=production --base-href=/se-role-fit/ && npx angular-cli-ghpages --dir=dist/demo --no-silent",
     "watch": "ng build --watch --configuration development"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
     "@angular-devkit/build-angular": "^18.1.0",
     "@angular/cli": "^18.1.0",
     "@angular/compiler-cli": "^18.1.0",
+    "angular-cli-ghpages": "^2.0.3",
     "typescript": "~5.5.0"
   }
 }
