@@ -21,6 +21,10 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
     <app-calculator-header (openModal)="openModal.emit()"></app-calculator-header>
     
     <div class="calculator-content">
+      <button class="reset-button glass-effect" (click)="resetCalculator()">
+        Reset All Selections
+      </button>
+
       <div class="section">
         <h3>Years of Experience</h3>
         <app-experience-slider [(value)]="experience"></app-experience-slider>
