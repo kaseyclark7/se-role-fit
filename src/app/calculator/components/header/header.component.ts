@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -19,10 +19,15 @@ import { CommonModule } from '@angular/common';
       </div>
       <h1>SE Role Fit <span class="highlight">Calculator</span></h1>
       <div class="subtitle">VETERANS UNITED HOME LOANS</div>
-      <button class="job-info-button glass-effect" (click)="openModal.emit()">
+      <a 
+        href="https://careers.veteransunited.com/open-positions/job/software-engineer-remote-hybrid-remote-mo-r4222/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="job-info-button glass-effect"
+      >
         View Job Description
         <div class="button-glow"></div>
-      </button>
+      </a>
       <div class="header-accent"></div>
     </div>
   `,
@@ -135,6 +140,4 @@ import { CommonModule } from '@angular/common';
     }
   `]
 })
-export class CalculatorHeaderComponent {
-  @Output() openModal = new EventEmitter<void>();
-} 
+export class CalculatorHeaderComponent {} 
