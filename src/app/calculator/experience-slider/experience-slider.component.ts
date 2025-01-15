@@ -18,7 +18,9 @@ import { CommonModule } from '@angular/common';
           <div class="handle-dot"></div>
         </div>
       </div>
-      <div class="value-display">{{ value }} Years</div>
+      <div class="value-display">
+        {{ value }} Years
+      </div>
     </div>
   `,
   styles: [`
@@ -32,7 +34,7 @@ import { CommonModule } from '@angular/common';
     .timeline {
       position: relative;
       height: 4px;
-      background: #e2e8f0;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 2px;
       margin: 2rem 0;
     }
@@ -40,7 +42,7 @@ import { CommonModule } from '@angular/common';
     .progress-bar {
       position: absolute;
       height: 100%;
-      background: #6366f1;
+      background: var(--neon-blue);
       border-radius: 2px;
       transition: width 0.1s ease;
     }
@@ -54,11 +56,11 @@ import { CommonModule } from '@angular/common';
     .handle-dot {
       width: 24px;
       height: 24px;
-      background: #6366f1;
-      border: 3px solid white;
+      background: var(--neon-blue);
+      border: 3px solid var(--background);
       border-radius: 50%;
       margin-top: -10px;
-      box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
       cursor: grab;
     }
 
@@ -69,10 +71,10 @@ import { CommonModule } from '@angular/common';
 
     .value-display {
       text-align: center;
-      margin-top: 1rem;
-      font-size: 1.5rem;
+      font-size: 2rem;
       font-weight: 600;
       color: var(--neon-blue);
+      margin-top: 1rem;
     }
   `]
 })

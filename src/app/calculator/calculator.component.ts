@@ -99,8 +99,9 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
         </div>
       </div>
 
-      <div class="score-section">
-        <h2>Fit Score: {{ calculateScore() }}%</h2>
+      <div class="score-section glass-effect">
+        <h2>{{ calculateScore() }}%</h2>
+        <p class="feedback">{{ getFeedback() }}</p>
       </div>
     </div>
   `,
@@ -169,6 +170,12 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
       color: var(--neon-blue);
       font-size: 2rem;
       margin: 0;
+    }
+
+    .feedback {
+      color: var(--text-primary);
+      margin: 0.5rem 0 0;
+      font-size: 1.1rem;
     }
   `]
 })
@@ -269,5 +276,22 @@ export class CalculatorComponent {
     score += Math.min(practiceScore, 20);
     
     return Math.min(Math.round(score), 100);
+  }
+
+  getFeedback(): string {
+    const score = this.calculateScore();
+    if (score >= 90) {
+      return "Outstanding fit! You're a perfect match for the role.";
+    } else if (score >= 80) {
+      return "Excellent fit! Your skills align very well with our needs.";
+    } else if (score >= 70) {
+      return "Strong fit! You have most of the skills we're looking for.";
+    } else if (score >= 60) {
+      return "Good fit! You have a solid foundation for the role.";
+    } else if (score >= 50) {
+      return "Moderate fit. Consider developing additional skills in key areas.";
+    } else {
+      return "Entry level fit. We encourage you to gain more experience in core technologies.";
+    }
   }
 }
