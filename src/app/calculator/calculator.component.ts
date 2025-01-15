@@ -220,50 +220,56 @@ export class CalculatorComponent {
     // Experience (30 points max, 6 points per year up to 5 years)
     score += Math.min(this.experience * 6, 30);
     
-    // Core Languages (8 points each)
-    if (this.languages.javascript) score += 8;
-    if (this.languages.csharp) score += 8;
+    // Core Languages (16 points max, 8 points each)
+    let coreLanguageScore = 0;
+    if (this.languages.javascript) coreLanguageScore += 8;
+    if (this.languages.csharp) coreLanguageScore += 8;
+    score += Math.min(coreLanguageScore, 16);
     
-    // Additional Languages (2 points each)
-    if (this.languages.python) score += 2;
-    if (this.languages.java) score += 2;
-    if (this.languages.cpp) score += 2;
-    if (this.languages.php) score += 2;
-    if (this.languages.go) score += 2;
-    if (this.languages.kotlin) score += 2;
-    if (this.languages.swift) score += 2;
+    // Additional Languages (14 points max, 2 points each)
+    let additionalLanguageScore = 0;
+    if (this.languages.python) additionalLanguageScore += 2;
+    if (this.languages.java) additionalLanguageScore += 2;
+    if (this.languages.cpp) additionalLanguageScore += 2;
+    if (this.languages.php) additionalLanguageScore += 2;
+    if (this.languages.go) additionalLanguageScore += 2;
+    if (this.languages.kotlin) additionalLanguageScore += 2;
+    if (this.languages.swift) additionalLanguageScore += 2;
+    score += Math.min(additionalLanguageScore, 14);
     
-    // Core Frameworks (8 points each)
-    if (this.frameworks.dotnet) score += 8;
-    if (this.frameworks.angular) score += 8;
+    // Core Frameworks (16 points max, 8 points each)
+    let coreFrameworkScore = 0;
+    if (this.frameworks.dotnet) coreFrameworkScore += 8;
+    if (this.frameworks.angular) coreFrameworkScore += 8;
+    score += Math.min(coreFrameworkScore, 16);
     
-    // Additional Frameworks (2 points each)
-    if (this.frameworks.react) score += 2;
-    if (this.frameworks.vue) score += 2;
-    if (this.frameworks.spring) score += 2;
-    if (this.frameworks.express) score += 2;
+    // Additional Frameworks (4 points max, 1 point each)
+    let additionalFrameworkScore = 0;
+    if (this.frameworks.react) additionalFrameworkScore += 1;
+    if (this.frameworks.vue) additionalFrameworkScore += 1;
+    if (this.frameworks.spring) additionalFrameworkScore += 1;
+    if (this.frameworks.express) additionalFrameworkScore += 1;
+    score += Math.min(additionalFrameworkScore, 4);
     
-    // Platforms & Tools (20 points max)
+    // Platforms & Tools (10 points max, 2 points each)
     let platformScore = 0;
-    if (this.platforms.mia) platformScore += 5;
-    if (this.platforms.github) platformScore += 5;
-    if (this.platforms.sql) platformScore += 5;
-    if (this.platforms.grafana) platformScore += 5;
-    if (this.platforms.kafka) platformScore += 5;
-    platformScore = Math.min(platformScore, 20);
-    score += platformScore;
+    if (this.platforms.mia) platformScore += 2;
+    if (this.platforms.github) platformScore += 2;
+    if (this.platforms.sql) platformScore += 2;
+    if (this.platforms.grafana) platformScore += 2;
+    if (this.platforms.kafka) platformScore += 2;
+    score += Math.min(platformScore, 10);
     
-    // Software Engineering Practices (3 points each, 20 points max)
+    // Software Engineering Practices (10 points max, 2 points each)
     let practiceScore = 0;
-    if (this.skills.apiFirst) practiceScore += 3;
-    if (this.skills.ddd) practiceScore += 3;
-    if (this.skills.cleanCode) practiceScore += 3;
-    if (this.skills.tdd) practiceScore += 3;
-    if (this.skills.pairProgramming) practiceScore += 3;
-    if (this.skills.cloud) practiceScore += 3;
-    if (this.skills.microservices) practiceScore += 3;
-    practiceScore = Math.min(practiceScore, 20);
-    score += practiceScore;
+    if (this.skills.apiFirst) practiceScore += 2;
+    if (this.skills.ddd) practiceScore += 2;
+    if (this.skills.cleanCode) practiceScore += 2;
+    if (this.skills.tdd) practiceScore += 2;
+    if (this.skills.pairProgramming) practiceScore += 2;
+    if (this.skills.cloud) practiceScore += 2;
+    if (this.skills.microservices) practiceScore += 2;
+    score += Math.min(practiceScore, 10);
     
     return Math.min(Math.round(score), 100);
   }

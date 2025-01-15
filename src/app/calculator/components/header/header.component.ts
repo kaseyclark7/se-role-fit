@@ -101,6 +101,8 @@ import { CommonModule } from '@angular/common';
       position: relative;
       overflow: hidden;
       transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .job-info-button:hover {
@@ -111,16 +113,21 @@ import { CommonModule } from '@angular/common';
     .button-glow {
       position: absolute;
       top: 0;
-      left: 0;
+      left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(45deg, transparent, rgba(0, 243, 255, 0.2), transparent);
-      transform: translateX(-100%);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 243, 255, 0.2),
+        transparent
+      );
       animation: button-glow 3s infinite;
     }
 
     @keyframes button-glow {
-      100% { transform: translateX(100%); }
+      0% { left: -100%; }
+      100% { left: 100%; }
     }
 
     .header-accent {

@@ -18,9 +18,7 @@ import { CommonModule } from '@angular/common';
           <div class="handle-dot"></div>
         </div>
       </div>
-      <div class="value-display">
-        {{value}} Years
-      </div>
+      <div class="value-display">{{ value }} Years</div>
     </div>
   `,
   styles: [`
@@ -74,7 +72,7 @@ import { CommonModule } from '@angular/common';
       margin-top: 1rem;
       font-size: 1.5rem;
       font-weight: 600;
-      color: #4f46e5;
+      color: var(--neon-blue);
     }
   `]
 })
