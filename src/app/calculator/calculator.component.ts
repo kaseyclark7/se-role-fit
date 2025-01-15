@@ -7,6 +7,7 @@ import { template } from './calculator.template';
 import { SkillsModel } from './models/skills.model';
 import { ExperienceSliderComponent } from './experience-slider/experience-slider.component';
 import { CalculatorHeaderComponent } from './components/header/header.component';
+import { SkillToggleComponent } from './components/skill-toggle/skill-toggle.component';
 
 @Component({
   selector: 'app-calculator',
@@ -19,9 +20,41 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
   ],
   template: `
     <app-calculator-header></app-calculator-header>
-    <!-- Rest of your calculator template -->
+    
+    <div class="calculator-content">
+      <div class="section">
+        <h3>Years of Experience</h3>
+        <app-experience-slider [(value)]="experience"></app-experience-slider>
+      </div>
+
+      <div class="section">
+        <h3>Programming Languages</h3>
+        <div class="subsection">
+          <h4>Core Languages</h4>
+          <app-skill-toggle label="JavaScript/TypeScript" [(value)]="languages.javascript" [points]="8"></app-skill-toggle>
+          <app-skill-toggle label="C#" [(value)]="languages.csharp" [points]="8"></app-skill-toggle>
+        </div>
+
+        <div class="subsection">
+          <h4>Additional Languages</h4>
+          <div class="skills-grid">
+            <app-skill-toggle label="Python" [(value)]="languages.python" [points]="2"></app-skill-toggle>
+            <app-skill-toggle label="Java" [(value)]="languages.java" [points]="2"></app-skill-toggle>
+            <app-skill-toggle label="C++" [(value)]="languages.cpp" [points]="2"></app-skill-toggle>
+            <app-skill-toggle label="PHP" [(value)]="languages.php" [points]="2"></app-skill-toggle>
+            <app-skill-toggle label="Go" [(value)]="languages.go" [points]="2"></app-skill-toggle>
+            <app-skill-toggle label="Kotlin" [(value)]="languages.kotlin" [points]="2"></app-skill-toggle>
+            <app-skill-toggle label="Swift" [(value)]="languages.swift" [points]="2"></app-skill-toggle>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rest of your existing template -->
+    </div>
   `,
-  styles: [styles]
+  styles: [`
+    /* Keep your existing styles */
+  `]
 })
 export class CalculatorComponent {
   experience = 0;
