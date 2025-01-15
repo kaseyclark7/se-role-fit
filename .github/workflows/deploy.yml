@@ -19,10 +19,12 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install -g @angular/cli
 
       - name: Build
-        run: ng build --configuration=production --base-href=/se-role-fit/
+        run: npm run build -- --configuration=production --base-href=/se-role-fit/
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
