@@ -11,6 +11,7 @@ import { ModalService } from './services/modal.service';
     <app-calculator></app-calculator>
 
     <div class="modal" [class.active]="(modalService.isOpen$ | async)">
+      <div class="modal-overlay" (click)="closeModal()"></div>
       <div class="modal-content glass-effect">
         <button class="close-button" (click)="closeModal()">×</button>
         <h2>Software Engineer Position</h2>
@@ -44,52 +45,43 @@ import { ModalService } from './services/modal.service';
           </ul>
         </div>
       </div>
-      <div class="modal-overlay" (click)="closeModal()"></div>
     </div>
   `,
   styles: [`
     .modal {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      inset: 0;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      z-index: 999;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
     }
 
     .modal.active {
       opacity: 1;
-      visibility: visible;
-    }
-
-    .modal-content {
-      width: 90%;
-      max-width: 800px;
-      max-height: 90vh;
-      background: var(--background);
-      border: 1px solid var(--neon-blue);
-      border-radius: 8px;
-      padding: 2rem;
-      position: relative;
-      overflow-y: auto;
-      z-index: 1000;
+      pointer-events: auto;
     }
 
     .modal-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      inset: 0;
       background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(5px);
-      z-index: 998;
+    }
+
+    .modal-content {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      padding: 2rem;
+      background: var(--background);
+      border: 1px solid var(--neon-blue);
+      border-radius: 8px;
+      overflow-y: auto;
+      z-index: 1;
     }
 
     .close-button {
@@ -101,45 +93,6 @@ import { ModalService } from './services/modal.service';
       color: var(--text-primary);
       font-size: 2rem;
       cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .close-button:hover {
-      color: var(--neon-blue);
-      transform: rotate(90deg);
-    }
-
-    .job-description {
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    .job-description h2 {
-      color: var(--neon-blue);
-      margin-bottom: 1.5rem;
-    }
-
-    .job-description h3 {
-      color: var(--neon-purple);
-      margin: 1.5rem 0 1rem;
-    }
-
-    .job-description ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    .job-description li {
-      margin-bottom: 0.5rem;
-      padding-left: 1.5rem;
-      position: relative;
-    }
-
-    .job-description li:before {
-      content: "•";
-      color: var(--neon-blue);
-      position: absolute;
-      left: 0;
     }
   `]
 })
