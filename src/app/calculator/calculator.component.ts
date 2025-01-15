@@ -7,7 +7,6 @@ import { template } from './calculator.template';
 import { SkillsModel } from './models/skills.model';
 import { ExperienceSliderComponent } from './experience-slider/experience-slider.component';
 import { CalculatorHeaderComponent } from './components/header/header.component';
-import { SkillToggleComponent } from './components/skill-toggle/skill-toggle.component';
 
 @Component({
   selector: 'app-calculator',
