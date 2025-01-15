@@ -222,6 +222,7 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
 export class CalculatorComponent {
   @Output() openModal = new EventEmitter<void>();
   experience = 0;
+  score = 0;
   languages: any = {
     javascript: false,
     csharp: false,
