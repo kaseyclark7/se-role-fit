@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, AsyncPipe } from '@angular/common';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { ModalService } from './services/modal.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, CalculatorComponent],
+  imports: [CommonModule, AsyncPipe, CalculatorComponent],
   template: `
     <app-calculator></app-calculator>
 
-    <div class="modal" [class.active]="(modalService.isOpen$ | async)">
+    <div class="modal" [class.active]="modalService.isOpen$ | async">
       <div class="modal-overlay" (click)="closeModal()"></div>
-      <div class="modal-content glass-effect">
+      <div class="modal-content">
         <button class="close-button" (click)="closeModal()">×</button>
         <h2>Software Engineer Position</h2>
         <div class="job-description">
@@ -50,39 +50,31 @@ import { ModalService } from './services/modal.service';
   styles: [`
     .modal {
       position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
       justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
+      align-items: center;
       z-index: 1000;
     }
 
     .modal.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(5px);
+      display: flex;
     }
 
     .modal-content {
-      position: relative;
-      width: 90%;
-      max-width: 800px;
-      max-height: 90vh;
-      padding: 2rem;
       background: var(--background);
-      border: 1px solid var(--neon-blue);
+      padding: 2rem;
       border-radius: 8px;
+      max-width: 800px;
+      width: 90%;
+      max-height: 90vh;
       overflow-y: auto;
-      z-index: 1001;
+      position: relative;
+      border: 1px solid var(--neon-blue);
     }
 
     .close-button {

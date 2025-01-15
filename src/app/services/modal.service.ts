@@ -9,12 +9,12 @@ export class ModalService {
   isOpen$ = this.isOpenSubject.asObservable();
 
   open() {
+    console.log('Modal opening...');
     this.isOpenSubject.next(true);
-    document.body.style.overflow = 'hidden';
   }
 
   close() {
+    console.log('Modal closing...');
     this.isOpenSubject.next(false);
-    document.body.style.overflow = 'auto';
   }
 } 
