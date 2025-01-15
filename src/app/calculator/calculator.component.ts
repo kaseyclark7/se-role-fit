@@ -280,15 +280,15 @@ export class CalculatorComponent {
 
   getFeedback(): string {
     const score = this.calculateScore();
-    if (score >= 90) {
+    if (score === 100) {
       return "Outstanding fit! You're a perfect match for the role.";
     } else if (score >= 80) {
       return "Excellent fit! Your skills align very well with our needs.";
     } else if (score >= 70) {
       return "Strong fit! You have most of the skills we're looking for.";
-    } else if (score >= 60) {
-      return "Good fit! You have a solid foundation for the role.";
     } else if (score >= 50) {
+      return "Good fit! You have a solid foundation for the role.";
+    } else if (score >= 40) {
       return "Moderate fit. Consider developing additional skills in key areas.";
     } else {
       return "Entry level fit. We encourage you to gain more experience in core technologies.";
