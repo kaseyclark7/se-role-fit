@@ -1,12 +1,10 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CalculatorService } from './calculator.service';
-import { styles } from './calculator.styles';
-import { template } from './calculator.template';
 import { SkillsModel } from './models/skills.model';
 import { ExperienceSliderComponent } from './experience-slider/experience-slider.component';
 import { CalculatorHeaderComponent } from './components/header/header.component';
+import { InterviewProcessModalComponent } from './components/interview-process-modal/interview-process-modal.component';
 
 @Component({
   selector: 'app-calculator',
@@ -15,99 +13,202 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
     CommonModule, 
     FormsModule, 
     ExperienceSliderComponent,
-    CalculatorHeaderComponent
+    CalculatorHeaderComponent,
+    InterviewProcessModalComponent
   ],
   template: `
-    <app-calculator-header (openModal)="openModal.emit()"></app-calculator-header>
-    
-    <div class="calculator-content">
-      <h2>Years of Experience</h2>
-      <app-experience-slider [(value)]="experience"></app-experience-slider>
+    <div class="calculator-container">
+      <app-calculator-header 
+        (openModal)="openModal.emit()"
+        (showInterviewProcess)="showInterviewProcess = true"
+      ></app-calculator-header>
+      
+      <div class="calculator-content">
+        <h2>Years of Experience</h2>
+        <div class="years-experience">
+          <app-experience-slider [(value)]="experience"></app-experience-slider>
+        </div>
 
-      <div class="section">
-        <h2>Programming Languages</h2>
-        <div class="subsection">
-          <h4>Core Languages</h4>
-          <div class="checkbox-group">
-            <label><input type="checkbox" [(ngModel)]="languages.javascript"> JavaScript/TypeScript</label>
-            <label><input type="checkbox" [(ngModel)]="languages.csharp"> C#</label>
+        <div class="section">
+          <h2>Programming Languages</h2>
+          <div class="subsection">
+            <h4>Core Languages</h4>
+            <div class="checkbox-group">
+              <label class="skill-button" [class.selected]="languages.javascript">
+                <input type="checkbox" [(ngModel)]="languages.javascript">
+                <span class="button-text">JavaScript/TypeScript</span>
+              </label>
+              <label class="skill-button" [class.selected]="languages.csharp">
+                <input type="checkbox" [(ngModel)]="languages.csharp">
+                <span class="button-text">C#</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h4>Additional Languages</h4>
+            <div class="checkbox-group">
+              <label class="skill-button" [class.selected]="languages.python">
+                <input type="checkbox" [(ngModel)]="languages.python">
+                <span class="button-text">Python</span>
+              </label>
+              <label class="skill-button" [class.selected]="languages.java">
+                <input type="checkbox" [(ngModel)]="languages.java">
+                <span class="button-text">Java</span>
+              </label>
+              <label class="skill-button" [class.selected]="languages.cpp">
+                <input type="checkbox" [(ngModel)]="languages.cpp">
+                <span class="button-text">C++</span>
+              </label>
+              <label class="skill-button" [class.selected]="languages.php">
+                <input type="checkbox" [(ngModel)]="languages.php">
+                <span class="button-text">PHP</span>
+              </label>
+              <label class="skill-button" [class.selected]="languages.go">
+                <input type="checkbox" [(ngModel)]="languages.go">
+                <span class="button-text">Go</span>
+              </label>
+              <label class="skill-button" [class.selected]="languages.kotlin">
+                <input type="checkbox" [(ngModel)]="languages.kotlin">
+                <span class="button-text">Kotlin</span>
+              </label>
+              <label class="skill-button" [class.selected]="languages.swift">
+                <input type="checkbox" [(ngModel)]="languages.swift">
+                <span class="button-text">Swift</span>
+              </label>
+            </div>
           </div>
         </div>
 
-        <div class="subsection">
-          <h4>Additional Languages</h4>
-          <div class="checkbox-group">
-            <label><input type="checkbox" [(ngModel)]="languages.python"> Python</label>
-            <label><input type="checkbox" [(ngModel)]="languages.java"> Java</label>
-            <label><input type="checkbox" [(ngModel)]="languages.cpp"> C++</label>
-            <label><input type="checkbox" [(ngModel)]="languages.php"> PHP</label>
-            <label><input type="checkbox" [(ngModel)]="languages.go"> Go</label>
-            <label><input type="checkbox" [(ngModel)]="languages.kotlin"> Kotlin</label>
-            <label><input type="checkbox" [(ngModel)]="languages.swift"> Swift</label>
+        <div class="section">
+          <h2>Frameworks</h2>
+          <div class="subsection">
+            <h4>Core Frameworks</h4>
+            <div class="checkbox-group">
+              <label class="skill-button" [class.selected]="frameworks.dotnet">
+                <input type="checkbox" [(ngModel)]="frameworks.dotnet">
+                <span class="button-text">.NET</span>
+              </label>
+              <label class="skill-button" [class.selected]="frameworks.angular">
+                <input type="checkbox" [(ngModel)]="frameworks.angular">
+                <span class="button-text">Angular</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h4>Additional Frameworks</h4>
+            <div class="checkbox-group">
+              <label class="skill-button" [class.selected]="frameworks.react">
+                <input type="checkbox" [(ngModel)]="frameworks.react">
+                <span class="button-text">React</span>
+              </label>
+              <label class="skill-button" [class.selected]="frameworks.vue">
+                <input type="checkbox" [(ngModel)]="frameworks.vue">
+                <span class="button-text">Vue.js</span>
+              </label>
+              <label class="skill-button" [class.selected]="frameworks.spring">
+                <input type="checkbox" [(ngModel)]="frameworks.spring">
+                <span class="button-text">Spring</span>
+              </label>
+              <label class="skill-button" [class.selected]="frameworks.express">
+                <input type="checkbox" [(ngModel)]="frameworks.express">
+                <span class="button-text">Express.js/NestJS</span>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="section">
-        <h2>Frameworks</h2>
-        <div class="subsection">
-          <h4>Core Frameworks</h4>
+        <div class="section">
+          <h2>Platforms & Tools</h2>
           <div class="checkbox-group">
-            <label><input type="checkbox" [(ngModel)]="frameworks.dotnet"> .NET</label>
-            <label><input type="checkbox" [(ngModel)]="frameworks.angular"> Angular</label>
+            <label class="skill-button" [class.selected]="platforms.mia">
+              <input type="checkbox" [(ngModel)]="platforms.mia">
+              <span class="button-text">MIA</span>
+            </label>
+            <label class="skill-button" [class.selected]="platforms.github">
+              <input type="checkbox" [(ngModel)]="platforms.github">
+              <span class="button-text">GitHub</span>
+            </label>
+            <label class="skill-button" [class.selected]="platforms.sql">
+              <input type="checkbox" [(ngModel)]="platforms.sql">
+              <span class="button-text">SQL</span>
+            </label>
+            <label class="skill-button" [class.selected]="platforms.grafana">
+              <input type="checkbox" [(ngModel)]="platforms.grafana">
+              <span class="button-text">Grafana</span>
+            </label>
+            <label class="skill-button" [class.selected]="platforms.kafka">
+              <input type="checkbox" [(ngModel)]="platforms.kafka">
+              <span class="button-text">Kafka</span>
+            </label>
+            <label class="skill-button" [class.selected]="platforms.mongodb">
+              <input type="checkbox" [(ngModel)]="platforms.mongodb">
+              <span class="button-text">MongoDB</span>
+            </label>
+            <label class="skill-button" [class.selected]="platforms.redis">
+              <input type="checkbox" [(ngModel)]="platforms.redis">
+              <span class="button-text">Redis</span>
+            </label>
+            <label class="skill-button" [class.selected]="platforms.elasticsearch">
+              <input type="checkbox" [(ngModel)]="platforms.elasticsearch">
+              <span class="button-text">Elasticsearch</span>
+            </label>
           </div>
         </div>
 
-        <div class="subsection">
-          <h4>Additional Frameworks</h4>
+        <div class="section">
+          <h2>Software Engineering Practices</h2>
           <div class="checkbox-group">
-            <label><input type="checkbox" [(ngModel)]="frameworks.react"> React</label>
-            <label><input type="checkbox" [(ngModel)]="frameworks.vue"> Vue.js</label>
-            <label><input type="checkbox" [(ngModel)]="frameworks.spring"> Spring</label>
-            <label><input type="checkbox" [(ngModel)]="frameworks.express"> Express.js/NestJS</label>
+            <label class="skill-button" [class.selected]="skills.apiFirst">
+              <input type="checkbox" [(ngModel)]="skills.apiFirst">
+              <span class="button-text">API-First Design</span>
+            </label>
+            <label class="skill-button" [class.selected]="skills.ddd">
+              <input type="checkbox" [(ngModel)]="skills.ddd">
+              <span class="button-text">Domain-Driven Design</span>
+            </label>
+            <label class="skill-button" [class.selected]="skills.cleanCode">
+              <input type="checkbox" [(ngModel)]="skills.cleanCode">
+              <span class="button-text">Clean Code</span>
+            </label>
+            <label class="skill-button" [class.selected]="skills.tdd">
+              <input type="checkbox" [(ngModel)]="skills.tdd">
+              <span class="button-text">Test-Driven Development</span>
+            </label>
+            <label class="skill-button" [class.selected]="skills.pairProgramming">
+              <input type="checkbox" [(ngModel)]="skills.pairProgramming">
+              <span class="button-text">Pair Programming</span>
+            </label>
+            <label class="skill-button" [class.selected]="skills.cloud">
+              <input type="checkbox" [(ngModel)]="skills.cloud">
+              <span class="button-text">Cloud Development</span>
+            </label>
+            <label class="skill-button" [class.selected]="skills.microservices">
+              <input type="checkbox" [(ngModel)]="skills.microservices">
+              <span class="button-text">Microservices</span>
+            </label>
           </div>
         </div>
+
+        <button class="reset-button glass-effect" (click)="resetCalculator()">
+          Reset All Selections
+        </button>
       </div>
 
-      <div class="section">
-        <h2>Platforms & Tools</h2>
-        <div class="checkbox-group">
-          <label><input type="checkbox" [(ngModel)]="platforms.mia"> MIA</label>
-          <label><input type="checkbox" [(ngModel)]="platforms.github"> GitHub</label>
-          <label><input type="checkbox" [(ngModel)]="platforms.sql"> SQL</label>
-          <label><input type="checkbox" [(ngModel)]="platforms.grafana"> Grafana</label>
-          <label><input type="checkbox" [(ngModel)]="platforms.kafka"> Kafka</label>
-          <label><input type="checkbox" [(ngModel)]="platforms.mongodb"> MongoDB</label>
-          <label><input type="checkbox" [(ngModel)]="platforms.redis"> Redis</label>
-          <label><input type="checkbox" [(ngModel)]="platforms.elasticsearch"> Elasticsearch</label>
-        </div>
+      <app-interview-process-modal
+        *ngIf="showInterviewProcess"
+        (close)="showInterviewProcess = false"
+      ></app-interview-process-modal>
+
+      <div class="score-section glass-effect">
+        <h2>{{ calculateScore() }}%</h2>
+        <p class="feedback">{{ getFeedback() }}</p>
       </div>
-
-      <div class="section">
-        <h2>Software Engineering Practices</h2>
-        <div class="checkbox-group">
-          <label><input type="checkbox" [(ngModel)]="skills.apiFirst"> API-First Design</label>
-          <label><input type="checkbox" [(ngModel)]="skills.ddd"> Domain-Driven Design</label>
-          <label><input type="checkbox" [(ngModel)]="skills.cleanCode"> Clean Code</label>
-          <label><input type="checkbox" [(ngModel)]="skills.tdd"> Test-Driven Development</label>
-          <label><input type="checkbox" [(ngModel)]="skills.pairProgramming"> Pair Programming</label>
-          <label><input type="checkbox" [(ngModel)]="skills.cloud"> Cloud Development</label>
-          <label><input type="checkbox" [(ngModel)]="skills.microservices"> Microservices</label>
-        </div>
-      </div>
-
-      <button class="reset-button glass-effect" (click)="resetCalculator()">
-        Reset All Selections
-      </button>
-    </div>
-
-    <div class="score-section glass-effect">
-      <h2>{{ calculateScore() }}%</h2>
-      <p class="feedback">{{ getFeedback() }}</p>
     </div>
   `,
   styles: [`
-    .calculator-content {
+    .calculator-container {
       max-width: 800px;
       margin: 0 auto;
       padding: 2rem;
@@ -133,25 +234,78 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
 
     .checkbox-group {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 1rem;
+      padding: 0.5rem;
     }
 
-    label {
+    .skill-button {
+      position: relative;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      color: var(--text-primary);
+      justify-content: center;
+      min-height: 45px;
+      padding: 0.8rem 1.2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 25px;
       cursor: pointer;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      text-align: center;
+      width: 100%;
     }
 
-    label:hover {
+    .skill-button input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    .button-text {
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all 0.3s ease;
+      text-align: center;
+      width: 100%;
+      line-height: 1.2;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+
+    .skill-button:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .skill-button.selected {
+      background: rgba(191, 123, 255, 0.15);
+      border-color: var(--neon-purple);
+      box-shadow: 0 0 15px rgba(191, 123, 255, 0.3),
+                  inset 0 0 10px rgba(191, 123, 255, 0.2);
+    }
+
+    .skill-button.selected .button-text {
       color: var(--neon-purple);
     }
 
-    input[type="checkbox"] {
-      accent-color: var(--neon-purple);
+    .skill-button:active {
+      transform: translateY(1px);
+    }
+
+    /* Add a subtle pulse animation for selected buttons */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 15px rgba(191, 123, 255, 0.3), inset 0 0 10px rgba(191, 123, 255, 0.2); }
+      50% { box-shadow: 0 0 20px rgba(191, 123, 255, 0.4), inset 0 0 15px rgba(191, 123, 255, 0.3); }
+      100% { box-shadow: 0 0 15px rgba(191, 123, 255, 0.3), inset 0 0 10px rgba(191, 123, 255, 0.2); }
+    }
+
+    .skill-button.selected:hover {
+      animation: pulse 2s infinite;
     }
 
     .score-section {
@@ -219,10 +373,50 @@ import { CalculatorHeaderComponent } from './components/header/header.component'
     .reset-button:hover::before {
       left: 100%;
     }
+
+    .years-experience {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .years-experience app-experience-slider {
+      width: 100%;
+      display: block;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .view-button {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--neon-blue);
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      width: fit-content;
+    }
+
+    .view-button:hover {
+      background: rgba(0, 255, 255, 0.1);
+      border-color: var(--neon-purple);
+      color: var(--neon-purple);
+    }
   `]
 })
 export class CalculatorComponent {
   @Output() openModal = new EventEmitter<void>();
+  showInterviewProcess = false;
   experience = 0;
   score = 0;
   languages: any = {

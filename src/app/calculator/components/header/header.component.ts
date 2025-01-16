@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="header glass-effect">
+    <div class="header-container">
       <div class="logo">
         <div class="cube">
           <div class="face front"></div>
@@ -17,27 +17,37 @@ import { CommonModule } from '@angular/common';
           <div class="face bottom"></div>
         </div>
       </div>
-      <h1>SE Role Fit <span class="highlight">Calculator</span></h1>
-      <div class="subtitle">VETERANS UNITED HOME LOANS</div>
-      <a 
-        href="https://careers.veteransunited.com/open-positions/job/software-engineer-remote-hybrid-remote-mo-r4222/" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        class="job-info-button glass-effect"
-      >
-        View Job Description
-        <div class="button-glow"></div>
-      </a>
+      <h1>SE Role Fit <span class="calculator">Calculator</span></h1>
+      <h3>VETERANS UNITED HOME LOANS</h3>
+      
+      <div class="button-container">
+        <a 
+          href="https://careers.veteransunited.com/open-positions/job/software-engineer-remote-hybrid-remote-mo-r4222/" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="view-button"
+        >
+          View Job Description
+          <div class="button-glow"></div>
+        </a>
+        <button class="view-button" (click)="showInterviewProcess.emit()">
+          View Interview Process
+          <div class="button-glow"></div>
+        </button>
+      </div>
       <div class="header-accent"></div>
     </div>
   `,
   styles: [`
-    .header {
+    .header-container {
       text-align: center;
+      margin-bottom: 2rem;
       padding: 2rem;
+      background: var(--background-darker);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       position: relative;
       overflow: hidden;
-      border-radius: 0 0 20px 20px;
     }
 
     .logo {
@@ -59,6 +69,7 @@ import { CommonModule } from '@angular/common';
       width: 100%;
       height: 100%;
       border: 2px solid var(--neon-blue);
+      background: rgba(0, 243, 255, 0.1);
     }
 
     .front { transform: translateZ(20px); }
@@ -74,40 +85,52 @@ import { CommonModule } from '@angular/common';
     }
 
     h1 {
-      font-size: 2.5rem;
-      margin: 1rem 0;
+      font-family: 'JetBrains Mono', monospace;
       color: var(--text-primary);
+      margin: 0;
+      font-size: 2rem;
     }
 
-    .highlight {
+    .calculator {
       color: var(--neon-purple);
     }
 
-    .subtitle {
+    h3 {
       color: var(--neon-blue);
+      margin: 0.5rem 0 1.5rem;
       font-size: 1rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.1em;
     }
 
-    .job-info-button {
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+
+    .view-button {
       background: transparent;
       color: var(--text-primary);
       border: 1px solid var(--neon-blue);
       padding: 0.8rem 1.5rem;
-      border-radius: 8px;
+      border-radius: 25px;
       cursor: pointer;
       font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
-      transition: all 0.3s ease;
+      width: fit-content;
       text-decoration: none;
       display: inline-block;
     }
 
-    .job-info-button:hover {
+    .view-button:hover {
       transform: translateY(-2px);
       box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+      border-color: var(--neon-purple);
     }
 
     .button-glow {
@@ -135,7 +158,7 @@ import { CommonModule } from '@angular/common';
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 4px;
+      height: 3px;
       background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-blue));
       background-size: 200% 100%;
       animation: gradient-shift 5s infinite linear;
@@ -147,4 +170,7 @@ import { CommonModule } from '@angular/common';
     }
   `]
 })
-export class CalculatorHeaderComponent {} 
+export class CalculatorHeaderComponent {
+  @Output() openModal = new EventEmitter<void>();
+  @Output() showInterviewProcess = new EventEmitter<void>();
+}
