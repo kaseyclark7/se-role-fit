@@ -72,6 +72,7 @@ Additional Platforms (1 point each):
 - Responsive design
 - Informative tooltips for additional context
 - Visual feedback through color-coded results
+- Upload a text, Word, or PDF resume to auto-populate skills
 
 ## Technical Details
 
