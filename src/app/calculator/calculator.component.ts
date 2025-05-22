@@ -5,16 +5,18 @@ import { SkillsModel } from './models/skills.model';
 import { ExperienceSliderComponent } from './experience-slider/experience-slider.component';
 import { CalculatorHeaderComponent } from './components/header/header.component';
 import { InterviewProcessModalComponent } from './components/interview-process-modal/interview-process-modal.component';
+import { ResumeUploadComponent } from './components/resume-upload/resume-upload.component';
 
 @Component({
   selector: 'app-calculator',
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
+    CommonModule,
+    FormsModule,
     ExperienceSliderComponent,
     CalculatorHeaderComponent,
-    InterviewProcessModalComponent
+    InterviewProcessModalComponent,
+    ResumeUploadComponent
   ],
   template: `
     <div class="calculator-container">
@@ -22,7 +24,8 @@ import { InterviewProcessModalComponent } from './components/interview-process-m
         (openModal)="openModal.emit()"
         (showInterviewProcess)="showInterviewProcess = true"
       ></app-calculator-header>
-      
+      <app-resume-upload (resumeParsed)="applyResume($event)"></app-resume-upload>
+
       <div class="calculator-content">
         <h2>Years of Experience</h2>
         <div class="years-experience">
@@ -530,6 +533,15 @@ export class CalculatorComponent {
     } else {
       return "Entry level fit. We encourage you to gain more experience in core technologies.";
     }
+  }
+
+  applyResume(data: SkillsModel) {
+    this.experience = data.experience;
+    Object.assign(this.languages, data.languages);
+    Object.assign(this.frameworks, data.frameworks);
+    Object.assign(this.platforms, data.platforms);
+    Object.assign(this.skills, data.skills);
+    this.score = this.calculateScore();
   }
 
   resetCalculator() {
